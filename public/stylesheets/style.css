@@ -33,3 +33,6 @@ button {
    background-color: #3C525B;
    color: white;
  }
+ .float-right {
+   float: right;
+ }

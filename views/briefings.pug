@@ -13,6 +13,9 @@ block content
       each briefing in briefings
         TR
           TD #{briefing.date.toISOString().split('T')[0]}
-          TD #{briefing.title}
+          TD 
+            A(href="/attendee/" + briefing._id) #{briefing.title}
           TD #{briefing.customer}
           TD #{briefing.rep}
+    DIV
+      button(onclick="window.location.href='/briefings/new'") Add Briefing
