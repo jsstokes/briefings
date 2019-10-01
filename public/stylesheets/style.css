@@ -1,5 +1,5 @@
 body {
-  background-color: green;
+  background-color: #506640;
   color: white;
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -14,10 +14,10 @@ a {
 .table-div {
   border-radius: 25px;
   padding: 25px;
-  background-color: rgb(43, 163, 43);
+  background-color: #B8C291;
 }
 .table-striped>tbody>tr:nth-child(odd)>td {
-   background-color: rgb(212, 243, 165); 
+   background-color: white; 
    color: black;
  }
  .table-striped>tbody>tr:nth-child(even)>td {
@@ -25,6 +25,6 @@ a {
    color: black; // Choose your own color here
  }
  .table-striped>tbody>tr:nth-child(odd)>th {
-   background-color: rgb(95, 93, 93);
+   background-color: #3C525B;
    color: white;
  }

@@ -13,6 +13,12 @@ var briefings = [
       customer: "Customer 2",
       date: new Date(),
       rep: "123"
+  },
+  {
+      title: "Briefing 2",
+      customer: "Customer 2",
+      date: new Date(),
+      rep: "123"
   }
 
 ];
