@@ -1,4 +1,5 @@
 var createError = require('http-errors');
+var cookieSession = require('cookie-session');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -8,6 +9,15 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1','key2']
+  //secret: "abcd123",
+
+  // Cookie Options
+  // maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
