@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1 Briefings
+  h3 for Some Rep
+  DIV.table-div
+    table.table.table-striped.thead-dark
+      TR
+        TH Date
+        TH Title
+        TH Customer
+        TH Rep
+      each briefing in briefings
+        TR
+          TD #{briefing.date.toISOString().split('T')[0]}
+          TD #{briefing.title}
+          TD #{briefing.customer}
+          TD #{briefing.rep}
