@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    h1 New Briefing
+    hr
+    div.table-div
+        form.form(action="/addBriefing", method="post")
+            div.form-group
+                label(for="title") Title
+                input.form-control(type='text' id="title" name='title')
+            div.form-group
+                label(for="customer") Customer
+                input.form-control(type='text' id="customer" name='customer')
+            div.form-group
+                label(for="description") Description
+                input.form-control(type='text' id="description" name='description')
+            div.form-group
+                - var today = new Date().toISOString().split('T')[0];
+                label(for="date") Event Date
+                input.form-control(type='date' id="date" name='date' value=today)
+            button(type="submit") Save
+            button(type="reset") Cancel
+        

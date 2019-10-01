@@ -26,5 +26,8 @@ var briefings = [
 router.get('/', function(req, res, next) {
   res.render('briefings', {briefings: briefings});
 });
+router.get('/new', function(req, res, next) {
+  res.render('newBriefing', {});
+});
 
 module.exports = router;
