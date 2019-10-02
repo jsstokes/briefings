@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  h1= briefing.title
+  DIV.table-div
+    table.table
+      TR
+        TD.detail-table-label Title
+        TD.detail-table-values= briefing.title
+      TR
+        TD.detail-table-label Customer
+        TD.detail-table-values= briefing.customer
+      TR
+        TD.detail-table-label Description
+        TD.detail-table-values= briefing.description
+      TR
+        TD.detail-table-label Date
+        TD.detail-table-values= briefing.date.toISOString().split("T")[0]
+      TR
+        TD
+        TD
+          button(onclick='alert("Not yet implemented")') Edit Briefing
+          button(onclick='alert("Not yet implemented")') Download Attendees
+  DIV
+    br 
+    br
+  DIV.table-div
+    span.sub-header Attendees
+    table.table.table-striped.table-bordered
+      TR
+        TH First Name
+        TH Last Name
+        TH Position
+        TH Phone
+        TH Email
+      each attendee in briefing.attendees
+        TR
+          TD #{attendee.lastName}
+          TD #{attendee.firstName}
+          TD #{attendee.position}
+          TD #{attendee.phone}
+          TD #{attendee.email}

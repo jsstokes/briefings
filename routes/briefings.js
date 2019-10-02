@@ -4,29 +4,9 @@ const MongoClient = require('mongodb').MongoClient;
 const mongoURL = "mongodb://localhost:27017/briefings";
 const dbName = "briefings";
 const client = new MongoClient(mongoURL,{useNewUrlParser: true, useUnifiedTopology: true});
+const {ObjectID} = require('mongodb');
 
 
-var briefings = [
-  {
-      title: "Briefing 1",
-      customer: "Customer 1",
-      date: new Date(),
-      rep: "123"
-  },
-  {
-      title: "Briefing 2",
-      customer: "Customer 2",
-      date: new Date(),
-      rep: "123"
-  },
-  {
-      title: "Briefing 2",
-      customer: "Customer 2",
-      date: new Date(),
-      rep: "123"
-  }
-
-];
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   retrieveAndRenderBriefings(res);
@@ -37,6 +17,11 @@ router.get('/new', function(req, res, next) {
   res.render('newBriefing', {});
 });
 
+router.get('/details/:briefingId', function (req,res, next){
+  console.log(`Getting Briefing details for ${req.params.briefingId}`);
+  getBriefingDetails(req.params.briefingId, res);
+});
+
 router.post('/new', function(req, res, next) {
   var briefing = {};
   briefing.title = req.body.title;
@@ -44,8 +29,24 @@ router.post('/new', function(req, res, next) {
   briefing.description = req.body.description;
   briefing.date = new Date(req.body.date);
   briefing.rep = "test rep";
+  briefing.attendees = [];
   addAndRetrieveBriefings(briefing,res);
 });
+
+async function getBriefingDetails(briefingId, res) {
+  try {
+    console.log("Attempting to retrieve briefing: " + briefingId);
+    await client.connect();
+    const db = client.db(dbName);
+    var briefing = await db.collection('briefings').findOne(new ObjectID(briefingId));
+    console.log(`retrieved briefing`);
+    console.log(briefing);
+    client.close();
+    res.render("briefingDetails", {"briefing": briefing});
+  } catch(err) {
+    console.log(err.stack);
+  }
+}
 
 async function addAndRetrieveBriefings(newBriefing, res) {
   try {
@@ -68,7 +69,15 @@ async function retrieveAndRenderBriefings(res) {
     console.log("Attempting to insert");
     await client.connect();
     const db = client.db(dbName);
-    var allBriefings = await db.collection("briefings").find().sort({date: 1}).toArray();
+    var allBriefings = await db.collection("briefings").aggregate([
+      { "$project": {
+          title:1,
+          customer: 1,
+          date: 1,
+          attendeeCount: {$size: "$attendees"}
+      }},
+      { "$sort": {date: 1}}
+    ]).toArray();
     // console.log(`attempting to return ${allBriefings.length} briefings`);
     // console.log(allBriefings);
     client.close();

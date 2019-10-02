@@ -21,6 +21,19 @@ button {
   background-color: #B8C291;
   color: black;
 }
+.detail-table-label {
+  text-align: right;
+}
+
+.sub-header {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.detail-table-values {
+  background-color: lightgray;
+}
+
 .table-striped>tbody>tr:nth-child(odd)>td {
    background-color: rgb(255, 255, 255); 
    color: black;

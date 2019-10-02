@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    h1= briefing._id
+    hr
+    div.table-div
+        form.form(action='/attendee/new' method="post")
+            input.form-control(type='hidden' value=briefing._id id='briefingId' name='briefingId')
+            div.form-group
+                label(for="firstName") First Name
+                input.form-control(type='text' id="firstName" name='firstName')
+            div.form-group
+                label(for="lastName") Last Name
+                input.form-control(type='text' id="lastName" name='lastName')
+            div.form-group
+                label(for="position") Position
+                input.form-control(type='text' id="position" name='position')
+            div.form-group
+                label(for="email") Email Address
+                input.form-control(type='text' id="email" name='email')
+            div.form-group
+                label(for="phone") Phone
+                input.form-control(type='text' id="phone" name='phone' limit=14)
+            button(type="submit") Save
+            button(type="reset") Cancel
+        

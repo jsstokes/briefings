@@ -9,13 +9,13 @@ block content
         TH Date
         TH Title
         TH Customer
-        TH Rep
+        TH Attended
       each briefing in briefings
         TR
           TD #{briefing.date.toISOString().split('T')[0]}
           TD 
-            A(href="/attendee/" + briefing._id) #{briefing.title}
+            A(href="/briefings/details/" + briefing._id) #{briefing.title}
           TD #{briefing.customer}
-          TD #{briefing.rep}
+          TD #{briefing.attendeeCount}
     DIV
       button(onclick="window.location.href='/briefings/new'") Add Briefing
