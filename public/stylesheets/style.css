@@ -30,6 +30,10 @@ button {
   font-weight: bold;
 }
 
+.qrcode {
+  padding-bottom: 15px;
+}
+
 .detail-table-values {
   background-color: lightgray;
 }

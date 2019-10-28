@@ -24,6 +24,27 @@ router.post('/new', function(req, res, next) {
   // res.send('adding attendee for briefing with ID of ' + req.body.briefingId + "<br>" + JSON.stringify(attendee));
 });
 
+router.get('/registration/:briefingId', function(req, res, next) {
+  console.log(`Attenmpting to render the registration page for ${req.params.briefingId}`);
+  renderRegistrationPage(req.params.briefingId, res);
+});
+
+async function renderRegistrationPage(briefingId, res) {
+  try {
+    console.log(`Getting briefing details for ${briefingId} and rendering registration page`);
+    await client.connect();
+    const db = client.db(dbName);
+    var criteria = {_id: ObjectID(briefingId)};
+    console.log("Criteria doc is " + JSON.stringify(criteria));
+    var briefing = await db.collection('briefings').findOne(criteria);
+    console.log("Found briefing & Rendering");
+    console.log(briefing);
+    res.render('registration',{briefing: briefing});
+} catch(err) {
+    console.log(err.stack);
+  }
+}
+
 async function addAttendee(attendee, briefingId, res) {
   try {
     console.log("Attempting to add an attendee for briefing: " + briefingId);
